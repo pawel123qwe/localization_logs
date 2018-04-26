@@ -12,20 +12,23 @@ legend('Right','Left')
 
 figure(2)
 direction = [0 0 1];
-rotate(plot(odom_wheel_x, odom_wheel_y),direction,0)
+plot(odom_wheel_x, odom_wheel_y)
 hold on
-plot(odometry_gps_x_right, odometry_gps_y_right)
-plot(odometry_gps_x_left, odometry_gps_y_left)
+plot(odometry_gps_x_left, -odometry_gps_y_left)
+plot(odometry_gps_x_right,- odometry_gps_y_right)
+% rotate(plot(odometry_gps_x_right, odometry_gps_y_right),direction,-140,[0 0 0])
+% rotate(plot(odometry_gps_x_left, odometry_gps_y_left),direction,-140,[0 0 0])
 plot(filtered_map_x, filtered_map_y)
 plot(filtered_odom_x, filtered_odom_y)
 title('Localization')
 legend('Hall+IMU','GPS Right+IMU','GPS Left+IMU','Hall+IMU+GPS','Hall+IMU (Filtered)')
 % legend('Hall','Hall+IMU+GPS','Hall+IMU')
 legend('Location','northwest')
-
-figure(3)
-plot(odom_wheel_x, odom_wheel_y)
-legend('Hall')
+xlim([-200 200]);
+ylim([-200 200]);
+% figure(3)
+% plot(odom_wheel_x, odom_wheel_y)
+% legend('Hall')
 
 
 
