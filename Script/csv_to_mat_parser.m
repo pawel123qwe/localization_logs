@@ -28,13 +28,13 @@ filtered_map_orie_z = table2array(filtered_map(:,18));
 filtered_map_orie_w = table2array(filtered_map(:,19));
 clear filtered_map
 
-% parse topic /odometry/filtered_odom
-filtered_odom = readtable('_slash_odometry_slash_filtered_odom.csv','Delimiter',',');
-filtered_odom_x = table2array(filtered_odom(:,12));
-filtered_odom_y = table2array(filtered_odom(:,13));
-filtered_odom_orie_z = table2array(filtered_odom(:,18));
-filtered_odom_orie_w = table2array(filtered_odom(:,19));
-clear filtered_odom
+% % parse topic /odometry/filtered_odom
+% filtered_odom = readtable('_slash_odometry_slash_filtered_odom.csv','Delimiter',',');
+% filtered_odom_x = table2array(filtered_odom(:,12));
+% filtered_odom_y = table2array(filtered_odom(:,13));
+% filtered_odom_orie_z = table2array(filtered_odom(:,18));
+% filtered_odom_orie_w = table2array(filtered_odom(:,19));
+% clear filtered_odom
 
 % parse topic /odometry/gps_left
 odometry_gps_left = readtable('_slash_odometry_slash_gps_left.csv','Delimiter',',');
