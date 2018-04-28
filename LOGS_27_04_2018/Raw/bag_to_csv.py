@@ -41,7 +41,7 @@ else:
 count = 0
 for bagFile in listOfBagFiles:
 	count += 1
-	print "reading file " + str(count) + " of  " + numberOfFiles + ": " + bagFile
+	print "reading file " + str(count) + " of " + numberOfFiles + ": " + bagFile
 	#access bag
 	bag = rosbag.Bag(bagFile)
 	bagContents = bag.read_messages()
@@ -95,4 +95,16 @@ for bagFile in listOfBagFiles:
 						values.append(pair[1])
 				filewriter.writerow(values)
 	bag.close()
-print "Done reading all " + numberOfFiles + " bag files."
+
+# remove bag files, because there is a new copy in the directory
+try:
+	print ""
+	count = 0
+	for bagFile in listOfBagFiles:
+		count += 1
+		os.remove(bagFile)
+		print "removed file " + str(count) + " of " + str(numberOfFiles) + ": " + str(bagFile)
+except OSError, e:
+    print "Error: %s - %s." % (e.filename, e.strerror)
+
+print "\nDone reading all " + str(numberOfFiles) + " bag files."
