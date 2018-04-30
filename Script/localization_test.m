@@ -4,9 +4,9 @@ csv_to_mat_parser
 load data.mat
 
 figure(1)
-plot(longitude_right,latitude_right)
+plot(longitude_right,latitude_right,'-o')
 hold on
-plot(longitude_left,latitude_left)
+plot(longitude_left,latitude_left,'-o')
 title('Raw Holux GPS')
 legend('Right','Left')
 
