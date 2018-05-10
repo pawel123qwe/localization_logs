@@ -9,7 +9,7 @@ For sequence of commands use "input.csv" file. Separate steering wheel, throttle
 - t1, t2 - throttle start and end flags,
 - s1, s2 - steering wheel start and end flags,
 - b1, b2 - brake start and end flags.
-There is no specific order of type of commands so brake command can be before or after of throttle command etc.
+There is no specific order of type of commands so brake command can be before or after of throttle command etc. **Remember** that flag with numer 1 has to be before flag with number 2 of the same type **(b1 has to be before b2)**
 
 ### Usage of script
 When open, script will prompt with list of possible commands to run:
