@@ -1,2 +1,0 @@
-rosbagTimestamp,header,seq,stamp,secs,nsecs,frame_id,level,name,msg,file,function,line,topics
-1524751707766299170,,25,,1524751707,533793441,'',2,"""/record_1524751707506966037""","""Recording to 2018-04-26-16-08-27.bag.""","""/tmp/binarydeb/ros-kinetic-rosbag-1.12.13/src/recorder.cpp""","""Recorder",395,[/rosout]
