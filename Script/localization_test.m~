@@ -1,0 +1,34 @@
+clear all
+close all
+csv_to_mat_parser
+load data.mat
+
+figure(1)
+plot(longitude_right,latitude_right)
+hold on
+plot(longitude_left,latitude_left)
+title('Raw Holux GPS')
+legend('Right','Left')
+
+figure(2)
+direction = [0 0 1];
+plot(odom_wheel_x, odom_wheel_y)
+% % hold on/home/eve/localization_logs/LOGS_28_04_2018/Full/bag_to_csv.py/home/eve/localization_logs/LOGS_28_04_2018/Full/bag_to_csv.py
+plot(odometry_gps_x_left, odometry_gps_y_left)
+plot(odometry_gps_x_right, odometry_gps_y_right)
+% rotate(plot(odometry_gps_x_right, odometry_gps_y_right),direction,-140,[0 0 0])
+% rotate(plot(odometry_gps_x_left, odometry_gps_y_left),direction,-140,[0 0 0])
+plot(filtered_map_x, filtered_map_y)
+title('Localization')
+legend('Hall+IMU','GPS Right+IMU','GPS Left+IMU','Hall+IMU+GPS')
+% legend('Hall','Hall+IMU+GPS','Hall+IMU')
+legend('Location','northwest')
+% xlim([-200 200]);
+% ylim([-200 200]);
+% figure(3)
+% plot(odom_wheel_x, odom_wheel_y)
+% legend('Hall')
+
+
+
+
