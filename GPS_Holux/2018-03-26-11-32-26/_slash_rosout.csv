@@ -1,0 +1,4 @@
+rosbagTimestamp,header,seq,stamp,secs,nsecs,frame_id,level,name,msg,file,function,line,topics
+1522056746479839585,,3,,1522056746,471630216,'',2,"""/record_1522056746460029654""","""Subscribing to /rosout""","""/tmp/binarydeb/ros-kinetic-rosbag-1.12.13/src/recorder.cpp""","""shared_ptr<ros",212,[/rosout]
+1522056746479863187,,4,,1522056746,474231677,'',2,"""/record_1522056746460029654""","""Subscribing to /time_reference""","""/tmp/binarydeb/ros-kinetic-rosbag-1.12.13/src/recorder.cpp""","""shared_ptr<ros",212,[/rosout]
+1522056746479880000,,5,,1522056746,476895545,'',2,"""/record_1522056746460029654""","""Subscribing to /rosout_agg""","""/tmp/binarydeb/ros-kinetic-rosbag-1.12.13/src/recorder.cpp""","""shared_ptr<ros",212,[/rosout]

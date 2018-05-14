@@ -1,4 +1,0 @@
-rosbagTimestamp,header,seq,stamp,secs,nsecs,frame_id,level,name,msg,file,function,line,topics
-1524736812827134542,,25,,1524736677,979660992,'',2,"""/ekf_se_odom""","""Valid clock time received. Starting node.""","""/home/eve/eve/eve_ws/src/robot_localization/src/ros_filter.cpp""","""RosFilter<T>",1747,"[/rosout, /diagnostics]"
-1524736812827162360,,26,,1524736812,826864580,'',4,"""/ekf_se_odom""","""Failed to meet update rate! Took 0.15834479900000000829 seconds. Try decreasing the\","""/home/eve/eve/eve_ws/src/robot_localization/src/ros_filter.cpp""","""RosFilter<T>",1933,"[/rosout, /diagnostics, /odometry/filtered_odom, /tf]"
-1524736874450352523,,27,,1524736874,450052445,'',4,"""/ekf_se_odom""","""Failed to meet update rate! Took 0.071260047000000006912 seconds. Try decreasing\","""/home/eve/eve/eve_ws/src/robot_localization/src/ros_filter.cpp""","""RosFilter<T>",1933,"[/rosout, /diagnostics, /odometry/filtered_odom, /tf]"

@@ -1,3 +1,0 @@
-rosbagTimestamp,header,seq,stamp,secs,nsecs,frame_id,level,name,msg,file,function,line,topics
-1524817677524579195,,21,,1524817677,329046190,'',2,"""/record_1524817677299413954""","""Recording to 2018-04-27-10-27-57.bag.""","""/tmp/binarydeb/ros-kinetic-rosbag-1.12.13/src/recorder.cpp""","""Recorder",395,[/rosout]
-1524817685216518801,,22,,1524817685,216264009,'',4,"""/stm_uart_node""","""Inbound TCP/IP connection failed","""tcpros_base.py""","""_tcp_server_callback""",351,"[/uart_data, /ros_vel, /rosout, /imu_stm]"
