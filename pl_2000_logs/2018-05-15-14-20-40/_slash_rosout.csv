@@ -1,0 +1,7 @@
+rosbagTimestamp,header,seq,stamp,secs,nsecs,frame_id,level,name,msg,file,function,line,topics
+1526386840171479955,,3,,1526386840,150100561,'',2,"""/record_1526386840137270398""","""Subscribing to /rosout""","""/tmp/binarydeb/ros-kinetic-rosbag-1.12.13/src/recorder.cpp""","""shared_ptr<ros",212,[/rosout]
+1526386840171535211,,4,,1526386840,153464405,'',2,"""/record_1526386840137270398""","""Subscribing to /rosout_agg""","""/tmp/binarydeb/ros-kinetic-rosbag-1.12.13/src/recorder.cpp""","""shared_ptr<ros",212,[/rosout]
+1526386840171548061,,5,,1526386840,157632081,'',2,"""/record_1526386840137270398""","""Subscribing to /tf_static""","""/tmp/binarydeb/ros-kinetic-rosbag-1.12.13/src/recorder.cpp""","""shared_ptr<ros",212,[/rosout]
+1526386840171565380,,6,,1526386840,162841900,'',2,"""/record_1526386840137270398""","""Subscribing to /clock""","""/tmp/binarydeb/ros-kinetic-rosbag-1.12.13/src/recorder.cpp""","""shared_ptr<ros",212,[/rosout]
+1526386840171585847,,7,,1526386840,166883764,'',2,"""/record_1526386840137270398""","""Subscribing to /time_reference""","""/tmp/binarydeb/ros-kinetic-rosbag-1.12.13/src/recorder.cpp""","""shared_ptr<ros",212,[/rosout]
+1526386840367428934,,11,,1526283928,381675901,'',2,"""/imu_broadcaster""","""Spinning until killed publishing /base_link to /imu""","""/tmp/binarydeb/ros-kinetic-tf2-ros-0.5.17/src/static_transform_broadcaster_program.cpp""","""main""",142,"[/rosout, /tf_static]"
