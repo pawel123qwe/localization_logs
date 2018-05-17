@@ -1,0 +1,2 @@
+rosbagTimestamp,transforms,-,header,seq,stamp,secs,nsecs,frame_id,child_frame_id,transform,translation,x,y,z,rotation,x,y,z,w
+1526386840368529388,,,0,,1526283928,378063073,"""/base_link""","""/gps_left""",,,1.1,0.3,0.495,,0.0,0.0,0.0,1.0
