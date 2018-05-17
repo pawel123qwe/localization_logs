@@ -1,25 +1,26 @@
 %%
 close all
 clear all
-load log1.mat
+load log4.mat
 
 % liczba probek uzywanych do regresji liniowej
-n=4;
+n=7;
 
 % wektor wyliczonych katow 
-yaw=[];
+yaw=[]
+num=1;
 
 % parametry filtru Kalmana - wariancja W bêdzie zalezna od aktualnej
 % dokladnosci
 W = 3; % wariancja Yaw
-V = 0.0001; % wariancja procesowa
+V = 0.00001; % wariancja procesowa
 
 % Model stanowy
 A = 1;
 C = 1;
 
 % Poczatkowe wartosci filtru
-P0 = 360;
+P0 = 10;
 x_0 = 0;
 x_pri_model_1 = x_0;
 Ppri = P0;
@@ -31,17 +32,16 @@ filtered_yaw = x_0;
 velocity=10; % aktualna prêdkosc - jest liczona z enkoderow
 vel_deviation=10; % dokladnosc wyznaczenia predkosci
 front_wheel=0; % kat skrecenia kol
-yaw_max_vel = 0.1; % maksymalna predkosc katowa
+yaw_max_vel = 0.05; % maksymalna predkosc katowa
 dist_threshold = 0.1; % minimalny dystans przejechany przez EVE aby estymacja kata miala sens
 
-min_delta=((velocity-vel_deviation)*1000/(3600*20))*n;
+min_delta=((velocity-vel_deviation)*1000/(3600*20))*n
 if min_delta < dist_threshold
     min_delta = dist_threshold;
 end
-max_delta=((velocity+vel_deviation)*1000/(3600*20))*n;
+max_delta=((velocity+vel_deviation)*1000/(3600*20))*n
 
 
-num=1;
 for i=1:length(easting)-n
     
     % Wybor n probek z loga - w czasie rzeczywistym wymagany bêdzie rejestr
@@ -61,21 +61,21 @@ for i=1:length(easting)-n
     if vect_lenght(i) > min_delta &&  vect_lenght(i) < max_delta
         
         % Funkcja zwracajaca wspolczynniki prostej regresji
-        p=polyfit(east,north,1);
+        p=polyfit(east,north,1)
         
         % Nachylenie prostej jest liczone od wschodu ( X - easting )
         % Podajemy wartosc kata od 0 do 2pi - a wiec musimy rozpoznawac
         % cwiartke zeby okreslic zarowno zwrot jak i kierunek EVE
-        if north(1) < north(n) && east(1) < east(n) && (0 < rad2deg(atan(p(1)))) && ( rad2deg(atan(p(1))) < 90)
+        if north(1) < north(n) && east(1) < east(n) && (0 < rad2deg(atan(p(1))) < 90)
             % I cwiartka
             yaw(num) = rad2deg(atan(p(1)));
-        elseif north(1) < north(n) && east(1) > east(n) && (-90 < rad2deg(atan(p(1)))) && (rad2deg(atan(p(1))) < 0)
+        elseif north(1) < north(n) && east(1) > east(n) && (-90 < rad2deg(atan(p(1))) < 0)
             % IV cwiartka
             yaw(num) = rad2deg(atan(p(1)))+360;
-        elseif north(1) > north(n) && east(1) > east(n) && (0 < rad2deg(atan(p(1)))) && (rad2deg(atan(p(1))) < 90)
+        elseif north(1) > north(n) && east(1) > east(n) && (0 < rad2deg(atan(p(1))) < 90)
             % III cwiartka
             yaw(num) = rad2deg(atan(p(1)))+180;
-        elseif north(1) > north(n) && east(1) < east(n) && (-90 < rad2deg(atan(p(1)))) && ( rad2deg(atan(p(1))) < 0)
+        elseif north(1) > north(n) && east(1) < east(n) && (-90 < rad2deg(atan(p(1))) < 0)
             % II cwiartka
             yaw(num) = rad2deg(atan(p(1)))+180;
         elseif p(1) == Inf
@@ -124,9 +124,6 @@ legend('Real','Filtered');
 figure(2)
 plot(easting-min(easting),northing-min(northing));
 title('Trasa');
-xlabel('Easting');
-ylabel('Northing');
-axis equal
 
 figure(3)
 plot(easting-min(easting));
