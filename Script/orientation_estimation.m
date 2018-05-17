@@ -1,24 +1,8 @@
 %%
 close all
 clear all
-load long_lat.mat
-% load north_east.mat
-% load in_place.mat
-% status = ones(length(northing));
+load log4.mat
 
-northing=longitude;
-easting=latitude;
-% northing=north;
-% easting=east;
-
-% longitude=flip(north);
-% latitude=flip(east);
-
-% longitude=east;
-% latitude=north;
-
-% longitude=flip(east);
-% latitude=flip(north);
 
 n=7;
 yaw=[]
@@ -41,8 +25,8 @@ Ppost = P0;
 filtered_yaw = x_0;
 
 %km/h
-velocity=5;
-vel_deviation=2;
+velocity=10;
+vel_deviation=10;
 front_wheel=0;
 yaw_max_vel = 0.05;
 dist_threshold = 0.1;
@@ -63,22 +47,21 @@ for i=1:length(easting)-n
         east=east-min(east);
         vect_lenght(i)=sqrt((max(north)-min(north))^2 + (max(east)-min(east))^2);
        
-        if vect_lenght(i) > min_delta &&  vect_lenght(i) < max_delta && status(i) ==1
+        if vect_lenght(i) > min_delta &&  vect_lenght(i) < max_delta
             
            p=polyfit(north,east,1)
-           yaw_prev = rad2deg(atan(p(1)))
             % Nachylenie prostej jest liczone od wschodu
             if north(1) < north(n) && east(1) < east(n) && (0 < rad2deg(atan(p(1))) < 90)
-                % I æwiartka
+                % I ï¿½wiartka
                 yaw(num) = rad2deg(atan(p(1)));
             elseif north(1) < north(n) && east(1) > east(n) && (-90 < rad2deg(atan(p(1))) < 0)
-                % IV æwiartka
+                % IV ï¿½wiartka
                 yaw(num) = rad2deg(atan(p(1)))+360;
             elseif north(1) > north(n) && east(1) > east(n) && (0 < rad2deg(atan(p(1))) < 90)
-                % III æwiartka
+                % III ï¿½wiartka
                 yaw(num) = rad2deg(atan(p(1)))+180;
             elseif north(1) > north(n) && east(1) < east(n) && (-90 < rad2deg(atan(p(1))) < 0)
-                % II æwiartka
+                % II ï¿½wiartka
                 yaw(num) = rad2deg(atan(p(1)))+180;
             elseif p(1) == Inf
                 yaw(num) = 90;
