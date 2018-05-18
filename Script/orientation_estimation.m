@@ -6,13 +6,13 @@ load log1.mat
 % liczba probek uzywanych do regresji liniowej
 n=4;
 
-% wektor wyliczonych katow 
+% wektor wyliczonych katow
 yaw=[];
 
-% parametry filtru Kalmana - wariancja W bêdzie zalezna od aktualnej
+% parametry filtru Kalmana - wariancja W bï¿½dzie zalezna od aktualnej
 % dokladnosci
 W = 3; % wariancja Yaw
-V = 0.0001; % wariancja procesowa
+V = 0.05; % wariancja procesowa
 
 % Model stanowy
 A = 1;
@@ -28,11 +28,11 @@ Ppost = P0;
 filtered_yaw = x_0;
 
 %km/h
-velocity=10; % aktualna prêdkosc - jest liczona z enkoderow
+velocity=10; % aktualna prï¿½dkosc - jest liczona z enkoderow
 vel_deviation=10; % dokladnosc wyznaczenia predkosci
 front_wheel=0; % kat skrecenia kol
-yaw_max_vel = 0.1; % maksymalna predkosc katowa
-dist_threshold = 0.1; % minimalny dystans przejechany przez EVE aby estymacja kata miala sens
+yaw_max_vel = 4; % maksymalna predkosc katowa
+dist_threshold = 0.03; % minimalny dystans przejechany przez EVE aby estymacja kata miala sens
 
 min_delta=((velocity-vel_deviation)*1000/(3600*20))*n;
 if min_delta < dist_threshold
@@ -40,32 +40,34 @@ if min_delta < dist_threshold
 end
 max_delta=((velocity+vel_deviation)*1000/(3600*20))*n;
 
+full_rotations=0;
 
 num=1;
 for i=1:length(easting)-n
     
-    % Wybor n probek z loga - w czasie rzeczywistym wymagany bêdzie rejestr
+    % Wybor n probek z loga - w czasie rzeczywistym wymagany bï¿½dzie rejestr
     % przesuwny.
     north=northing(i:i+n-1);
     east=easting(i:i+n-1);
-
-    % Sprowadzenie do poczatku uk³adu celem unikniecia bledow numerycznych
+    
+    % Sprowadzenie do poczatku ukï¿½adu celem unikniecia bledow numerycznych
     north=north-min(north);
     east=east-min(east);
     
     % Dystans przejechany przez EVE liczony z ostatnich n probek
     vect_lenght(i)=sqrt((max(north)-min(north))^2 + (max(east)-min(east))^2);
-
+    
     % Sprawdzamy czy EVE przejechala minimalny dystans i czy nie wystapil
     % blad gruby - jesli tak - nie wyliczamy kata.
-    if vect_lenght(i) > min_delta &&  vect_lenght(i) < max_delta
+    if vect_lenght(i) > min_delta &&  vect_lenght(i) < max_delta && status(i)~=-1
         
         % Funkcja zwracajaca wspolczynniki prostej regresji
-        p=polyfit(east,north,1);
+        p=polyfit(north,east,1);
         
         % Nachylenie prostej jest liczone od wschodu ( X - easting )
         % Podajemy wartosc kata od 0 do 2pi - a wiec musimy rozpoznawac
         % cwiartke zeby okreslic zarowno zwrot jak i kierunek EVE
+        yaw_temp(num) = rad2deg(atan(p(1)));
         if north(1) < north(n) && east(1) < east(n) && (0 < rad2deg(atan(p(1)))) && ( rad2deg(atan(p(1))) < 90)
             % I cwiartka
             yaw(num) = rad2deg(atan(p(1)));
@@ -85,34 +87,44 @@ for i=1:length(easting)-n
         elseif num>1
             yaw(num) = yaw(num-1);
         end
-
+        
+        
         if num > 1
-
-            if (abs(yaw(num)-yaw(num-1)) > yaw_max_vel)
-                if yaw(num) >= yaw(num-1)                         
+            
+            if (abs(yaw(num)-yaw(num-1)) > yaw_max_vel) && abs(yaw(num)-yaw(num-1))<310 
+                if yaw(num) >= yaw(num-1)
                     yaw(num) = yaw(num-1)+yaw_max_vel;
                 else
                     yaw(num) = yaw(num-1)-yaw_max_vel;
                 end
             end
-
+            
+            
+            
             % Filtr Kalmana
             % predykcja
             x_pri_model_1(num) = A*x_post;
             Ppri = A*Ppost*A' + V;
-
+            
             %korekcja
             eps_model = yaw(num) - C*x_pri_model_1(num);
+            Hist_eps_model(num) = eps_model;
             S = C*Ppri*C' + W;
             K = Ppri*C'*S^(-1);
+            Hist_S(num) = S;
+            Hist_K(num) = K;
             x_post = x_pri_model_1(num) + K*eps_model;
             Ppost = Ppri - K*S*K';
             filtered_yaw(num) = x_post;
+            if abs(eps_model) > 300
+                Ppri = 360;
+                Ppost = 360;
+            end
         end
         num=num+1;
-
+        
     end
-
+    
 end
 
 figure(1)

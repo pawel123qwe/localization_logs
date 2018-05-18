@@ -1,0 +1,2 @@
+rosbagTimestamp,transforms,-,header,seq,stamp,secs,nsecs,frame_id,child_frame_id,transform,translation,x,y,z,rotation,x,y,z,w
+1526640607691475704,,,0,,1526629635,889333052,"""/base_link""","""/imu""",,,0.62,0.32,-0.08,,0.0,0.0,0.0,1.0
