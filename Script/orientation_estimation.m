@@ -1,7 +1,11 @@
 %%
 close all
 clear all
+<<<<<<< Updated upstream
 load log1.mat
+=======
+load log2.mat
+>>>>>>> Stashed changes
 
 % liczba probek uzywanych do regresji liniowej
 n=4;
